@@ -2,7 +2,7 @@ from os.path import expanduser, exists
 from shutil import copy
 from initxyz.utils import mkdir, symlink_force
 from initxyz.vars import xyzdir, xyzcodedir
-from initxyz.core import reload
+from initxyz.core import reload, set_profile_enabled
 
 class Init:
     name = 'init'
@@ -32,4 +32,26 @@ class Reload:
     def run(self, ns):
         reload()
 
-commands = [Init, Reload]
+class Enable:
+    name = 'enable'
+
+    @classmethod
+    def make_parser(self, parser):
+        parser.add_argument('profile_name')
+
+    @classmethod
+    def run(self, ns):
+        set_profile_enabled(ns.profile_name, True)
+
+class Disable:
+    name = 'disable'
+
+    @classmethod
+    def make_parser(self, parser):
+        parser.add_argument('profile_name')
+
+    @classmethod
+    def run(self, ns):
+        set_profile_enabled(ns.profile_name, False)
+
+commands = [Init, Reload, Enable, Disable]

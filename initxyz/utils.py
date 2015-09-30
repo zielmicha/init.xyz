@@ -33,6 +33,34 @@ def symlink_force(src, dst):
         os.unlink(dst)
     os.symlink(src, dst)
 
+class colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    RESET = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def warn(txt):
+    print(colors.WARNING + 'WARN: ' + colors.RESET + txt + colors.RESET)
+
+def info(txt):
+    print(colors.OKBLUE + 'INFO: ' + colors.RESET + txt + colors.RESET)
+
+def ask_yes_no(question, default=False):
+    prefix = colors.OKGREEN + 'QUESTION: ' + colors.RESET
+    while True:
+        response = input(prefix + question + ' ' + ('(Y/n)' if default else '(y/N)') + ': ')
+        resp = response.strip().lower()
+        if resp.startswith('y'):
+            return True
+        if resp.startswith('n'):
+            return False
+        if not resp:
+            return default
+
 def move_to_backup(path):
     if os.path.isdir(path):
         raise OSError('%r is a directory' % path)

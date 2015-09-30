@@ -11,10 +11,10 @@ def set_current_session(session):
     _current_session = session
 
 class Session:
-    def __init__(self):
+    def __init__(self, name='root', parent=None):
         self._end_funcs = []
-        self.parent = None
-        self.name = 'root'
+        self.parent = parent
+        self.name = name
 
     def is_root(self):
         return self.parent is None
