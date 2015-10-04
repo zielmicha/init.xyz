@@ -12,6 +12,6 @@ def update_alternatives(name, target):
 
 def check_alternative(name, target):
     try:
-        return os.readlink('/etc/alternatives/' + name) == target
+        return readlink('/etc/alternatives/' + name) == target
     except OSError:
         return False
