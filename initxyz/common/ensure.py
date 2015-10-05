@@ -6,5 +6,7 @@ from initxyz.utils import hostname, execfile, execfile_if_exists
 from initxyz.zsh import zsh
 from initxyz.apt import apt
 from initxyz.vcs import git_repo
+from initxyz.emacs import emacs
 
-from initxyz.common.ensure_misc import mkdir, update_alternatives
+from initxyz.common.ensure_misc import (
+    mkdir, symlink, update_alternatives, dconf_load, exists)

@@ -26,6 +26,7 @@ def execute_profile(name, filename, depth):
     session = Session(name, parent=get_current_session())
     set_current_session(session)
     execfile(filename, depth=depth + 1)
+    session.end()
     set_current_session(session.parent)
 
 profiles_config = ConfigFile(xyzdir + '/profiles.ini')

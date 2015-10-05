@@ -39,7 +39,7 @@ class Zsh(SessionPlugin):
         return out.getvalue()
 
     def _generate_zshrc(self):
-        is_root = self.session.is_root()
+        is_root = True # self.session.is_root() - for now
         mkdir(xyzdir + '/var')
         if is_root:
             zshrc_loc = xyzdir + '/var/zshrc'

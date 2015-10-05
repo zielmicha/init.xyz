@@ -78,6 +78,7 @@ def symlink_and_move_old_to_backup(src, dst):
 
     if os.path.exists(dst):
         move_to_backup(dst)
+
     os.symlink(src, dst)
 
 def hostname():
