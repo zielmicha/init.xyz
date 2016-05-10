@@ -12,6 +12,7 @@ class Zsh(SessionPlugin):
         self.postpath = []
         self.prepath = []
         self.includes = []
+        self.variables = {}
 
     def enable(self):
         self.session.assert_root()
@@ -26,6 +27,9 @@ class Zsh(SessionPlugin):
     def include(self, file):
         self.includes.append(file)
 
+    def set_variable(self, key, value):
+        self.variables[key] = value
+
     def _make_content(self):
         out = StringIO()
 
@@ -33,6 +37,10 @@ class Zsh(SessionPlugin):
         out.write('export XYZ_ORIGINAL_PATH="$PATH"')
         out.write('export PATH=' + (':'.join([ quote(expanduser(seg)) for seg in self.prepath ] +
                                              ['"$PATH"'] + [ quote(expanduser(seg)) for seg in self.postpath ])) + '\n')
+
+        for key, value in sorted(self.variables.items()):
+            out.write('export %s=%s\n' % (quote(key), quote(value)))
+
         for fn in self.includes:
             out.write('source %s\n' % join(xyzconfigdir, fn))
 

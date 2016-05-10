@@ -6,7 +6,12 @@ from initxyz.configfile import ConfigFile
 from os import chdir
 from os.path import exists
 
-def reload():
+SILENT = False
+
+def reload(silent):
+    global SILENT
+    SILENT = silent
+
     info('Reloading configuration')
     chdir(xyzconfigdir)
     current_session = Session()
@@ -33,7 +38,7 @@ profiles_config = ConfigFile(xyzdir + '/profiles.ini')
 
 def is_profile_enabled(name, ask=False):
     if not profiles_config.has_option('profiles', name):
-        if ask:
+        if ask and not SILENT:
             enable = ask_yes_no('New profile %r added. Enable it now?' % name)
             set_profile_enabled(name, enable)
             return enable

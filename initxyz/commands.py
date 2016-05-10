@@ -26,11 +26,11 @@ class Reload:
 
     @classmethod
     def make_parser(self, parser):
-        pass
+        parser.add_argument('--silent', action='store_true', default=False)
 
     @classmethod
     def run(self, ns):
-        reload()
+        reload(silent=ns.silent)
 
 class Enable:
     name = 'enable'
