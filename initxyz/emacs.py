@@ -31,7 +31,7 @@ class Emacs(SessionPlugin):
 
     def _generate_init(self):
         loc = expanduser('~/.initxyz/var/init.el')
-        symlink_and_move_old_to_backup(expanduser('~/.emacs'), loc)
+        symlink_and_move_old_to_backup(loc, expanduser('~/.emacs'))
 
         write_file(path=loc, data=self._make_content())
 

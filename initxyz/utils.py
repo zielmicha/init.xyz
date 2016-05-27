@@ -71,7 +71,7 @@ def move_to_backup(path):
 
 def symlink_and_move_old_to_backup(src, dst):
     try:
-        if os.readlink(src) == dst:
+        if os.readlink(dst) == src:
             return
     except OSError:
         pass
