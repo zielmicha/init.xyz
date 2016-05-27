@@ -18,6 +18,7 @@ class Init:
 
         init_path = xyzdir + '/configs/init.py'
 
+        mkdir(xyzdir + '/var')
         if not exists(init_path):
             copy(xyzcodedir + '/example_init.py', init_path)
 

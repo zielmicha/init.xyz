@@ -1,7 +1,7 @@
 from os.path import expanduser, exists as _exists
 from os import readlink, symlink as _symlink
 from subprocess import check_call, PIPE, Popen, CalledProcessError
-from initxyz.utils import mkdir as _mkdir, as_bytes
+from initxyz.utils import mkdir as _mkdir, as_bytes, warn
 
 def symlink(src, dst):
     try:
@@ -33,4 +33,4 @@ def dconf_load(path, data):
     proc.stdin.write(as_bytes(data))
     proc.stdin.close()
     if proc.wait() != 0:
-        raise CalledProcessError('dconf load failed')
+        warn('dconf load failed')
